@@ -9,7 +9,6 @@ public class Client {
 	/**
 		 * Methode zur Ausgabe einer Zahl auf der Console
 		 * (auch bezeichnet als CLI, Terminal)
-		 *
 		 * Factory Method(GoF, Kapitel 6)
 		 * "ich gebe vor wie die Objekte erzeugt werden"
 		 */

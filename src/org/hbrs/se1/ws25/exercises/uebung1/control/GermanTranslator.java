@@ -1,4 +1,5 @@
 package org.hbrs.se1.ws25.exercises.uebung1.control;
+import org.hbrs.se1.ws25.exercises.uebung1.view.Client;
 
 public class GermanTranslator implements Translator {
 
