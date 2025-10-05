@@ -8,7 +8,7 @@ public class GermanTranslator implements Translator {
 	/**
 	 * Methode zur Übersetzung einer Zahl in eine String-Repraesentation
 	 */
-	//Das Initiale Setzen der Strings
+	//Das initiale Setzen der Strings
 	String[] Zahlen = {
 			"eins", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn"
 	};
@@ -27,7 +27,7 @@ public class GermanTranslator implements Translator {
 	}
 
 	/**
-	 * Objektmethode der Klasse GermanTranslator zur Ausgabe einer Info.
+	 * Objektmethode der Klasse GermanTranslator zur Ausgabe einer Information.
 	 */
 	void printInfo(){
 		System.out.println( "GermanTranslator v1.9, erzeugt am " + this.date );
