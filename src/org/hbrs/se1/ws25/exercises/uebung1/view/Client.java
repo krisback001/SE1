@@ -1,11 +1,17 @@
 package org.hbrs.se1.ws25.exercises.uebung1.view;
 
+import org.hbrs.se1.ws25.exercises.uebung1.TranslatorFactory;
+import org.hbrs.se1.ws25.exercises.uebung1.control.GermanTranslator;
+import org.hbrs.se1.ws25.exercises.uebung1.control.Translator;
+
 public class Client {
 
 	/**
 		 * Methode zur Ausgabe einer Zahl auf der Console
 		 * (auch bezeichnet als CLI, Terminal)
 		 *
+		 * Factory Method(GoF, Kapitel 6)
+		 * "ich gebe vor wie die Objekte erzeugt werden"
 		 */
 		 void display( int aNumber ){
 			// In dieser Methode soll die Methode translateNumber
@@ -14,8 +20,12 @@ public class Client {
 			//
 			// Strenge Implementierung (nur) gegen das Interface Translator gewuenscht!
 
-			 System.out.println("Das Ergebnis der Berechnung: " +
-					"[das Ergebnis an dieser Stelle]" );
+
+			 Translator translator = TranslatorFactory.createGermanTranslator();
+			 String result = translator.translateNumber(aNumber);
+
+			 System.out.println("Das Ergebnis der Berechnung: " + result );
+
 		 }
 }
 

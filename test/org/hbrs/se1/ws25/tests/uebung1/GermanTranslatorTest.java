@@ -11,7 +11,11 @@ public class GermanTranslatorTest {
     public void aTest() {
         GermanTranslator translator = new GermanTranslator();
 
-        assertEquals("null" , translator.translateNumber(0));
+        assertEquals("Übersetzung der Zahl 0 nicht möglich v1.9", translator.translateNumber(0));
+        assertEquals("Übersetzung der Zahl -5 nicht möglich v1.9" , translator.translateNumber(-5));
+        assertEquals("fünf" , translator.translateNumber(5));
+        assertEquals("Übersetzung der Zahl 15 nicht möglich v1.9" , translator.translateNumber(15));
     }
+
 
 }
