@@ -12,7 +12,7 @@ public class ContainerTest {
     @Test
     public void testContainerFunktion() throws ContainerException {
 
-        Container container = new Container();
+        Container container = Container.getInstance();
 
         Member m1 = new ConcreteMember(1);
         Member m2 = new ConcreteMember(2);
@@ -22,7 +22,7 @@ public class ContainerTest {
 
         ContainerException ex = assertThrows(ContainerException.class,
                 () -> container.addMember(new ConcreteMember(1)));
-        assertEquals("Der Member mit der ID 1 ist bereits vorhanden!", ex.getMessage());
+        assertEquals("Das Member-Objekt mit der ID 1 ist bereits vorhanden!", ex.getMessage());
 
 
         //Löschen eines existierenden Members
