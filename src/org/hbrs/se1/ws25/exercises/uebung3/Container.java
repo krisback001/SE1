@@ -1,4 +1,4 @@
-package org.hbrs.se1.ws25.exercises.uebung2;
+package org.hbrs.se1.ws25.exercises.uebung3;
 
 import org.hbrs.se1.ws25.exercises.uebung3.persistence.PersistenceException;
 import org.hbrs.se1.ws25.exercises.uebung3.persistence.PersistenceStrategy;
@@ -25,7 +25,7 @@ public final class Container {
     }
 
     //CR2:
-    public PersistenceStrategy<Member> strategy;
+    private PersistenceStrategy<Member> strategy;
 
     public void setPersistenceStrategy(PersistenceStrategy<Member> p) {
         this.strategy = p;
