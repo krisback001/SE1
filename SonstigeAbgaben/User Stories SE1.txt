@@ -1,0 +1,91 @@
+Epic 1: Geräteverwaltung
+
+User Story 1:
+Als Student möchte ich mir über das Buchungssystem Geräte reservieren und damit während Projekten arbeiten.
+
+Mehrwert: Plankbarkeit von Bestand (vorhandene Geräte)
+Aufwand: 8
+Akzeptanzkriterien:
+	Benutzer kann Gerät aus Liste auswählen und Zeitraum festlegen.
+	System verhindert Doppelbuchungen für denselben Zeitraum.
+
+User Story 2:
+Als Techniker möchte ich Reparaturen an Geräten ausführen, und den Zustand der Geräte festhalten.
+
+Mehrwert: Keine defekten Geräte 
+Aufwand: 5
+Akzeptanzkriterien:
+	Wartungsprotokolle können für jedes Gerät hinzugefügt und eingesehen werden.
+	Gerät wird während einer Wartung automatisch als „nicht verfügbar“ markiert.
+
+--------------------------------------------------
+Epic 2: Raumverwaltung
+
+User Story 3:
+Als Student möchte ich leere Lernräume einsehen und für Gruppenarbeiten online buchen.
+Mehrwert: Übersicht/Optimale Nutzung knapper Lernräum
+
+Aufwand: 5
+Akzeptanzkriterien:
+	Freie Räume werden mit Datum, Uhrzeit angezeigt.
+	Nach Buchung erhält der Benutzer eine Bestätigungsnachricht.
+
+User Story 4:
+Als Verwaltungsmitarbeiter möchte ich die Raumbelegung in Echtzeit einsehen können,
+um die Auslastung besser zu koordinieren.
+
+Mehrwert: Effiziente Verwaltung und bessere Übersicht
+Aufwand: 5
+Akzeptanzkriterien:
+	Das System zeigt belegte und freie Räume visuell (z. B. farblich) an.
+	Änderungen an Buchungen werden sofort im Kalender aktualisiert.
+
+
+--------------------------------------------------
+Epic 3: Materialverwaltung
+
+User Story 5:
+Als Student möchte ich Materialien einfach ausleihen und zurückgeben können,
+um für Projekte benötigte Ausstattung schnell zu erhalten.
+
+Mehrwert: Zeitersparnis und weniger organisatorischer Aufwand
+Aufwand: 5
+Akzeptanzkriterien:
+	System erfasst Ausleihe mit Nutzername und Zeitraum.
+	Nach Rückgabe wird das Material automatisch wieder als verfügbar markiert.
+
+User Story 6:
+Als Verwalter des Lagers möchte ich jederzeit den aktuellen Materialbestand sehen können,
+um eventuell neues Material zu bestellen.
+
+Mehrwert: Bessere Ressourcenplanung
+Aufwand: 3
+Akzeptanzkriterien:
+	Materialübersicht zeigt Anzahl, Status und Standort an.
+	System warnt, wenn ein Mindestbestand unterschritten wird.
+
+--------------------------------------------------
+Epic 4: Benutzerverwaltung
+
+User Story 7:
+Als Nutzer möchte ich mich mit meinem Hochschul-Account anmelden können,
+damit ich keinen neuen Zugang erstellen muss.
+
+Mehrwert: Einfacher Zugang, weniger Administrationsaufwand
+Aufwand: 3
+Akzeptanzkriterien:
+	Anmeldung funktioniert über MIA.
+	Nur autorisierte Nutzer können sich einloggen.
+
+--------------------------------------------------
+Epic 5: Nachrichtenzentrale
+
+User Story 8:
+Als Nutzer möchte ich automatische Benachrichtigungen über bevorstehende Buchungen oder Rückgaben erhalten,
+damit ich Fristen nicht verpasse.
+
+Mehrwert: Erhöhte Nutzerzufriedenheit, weniger vergessene Rückgaben
+Aufwand: 5
+Akzeptanzkriterien:
+	Benutzer erhält 24h vor Ablauf der Buchung eine E-Mail.
+	Nachrichten werden auch im System-Posteingang angezeigt.
