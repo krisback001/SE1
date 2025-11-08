@@ -1,4 +1,5 @@
 package org.hbrs.se1.ws25.exercises.uebung4.persistence;
+import org.hbrs.se1.ws25.exercises.uebung4.UserStory;
 
 import java.util.List;
 
@@ -8,10 +9,8 @@ import java.util.List;
  * This interface corresponds to the abstract strategy w.r.t. to the
  * Strategy Design Pattern (GoF).
  *
- * @param <E>
  */
-
 public interface PersistenceStrategy<E> {
-    public void save(List<E> member) throws PersistenceException;
+    public void save(List<UserStory> objects) throws PersistenceException;
     public List<E> load() throws PersistenceException;
 }

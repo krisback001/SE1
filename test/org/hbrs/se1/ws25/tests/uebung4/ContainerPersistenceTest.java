@@ -1,10 +1,12 @@
-package org.hbrs.se1.ws25.tests.uebung3;
-
-import org.hbrs.se1.ws25.exercises.uebung3.persistence.PersistenceException;
-import org.hbrs.se1.ws25.exercises.uebung3.persistence.PersistenceStrategyMongoDB;
-import org.hbrs.se1.ws25.exercises.uebung3.persistence.PersistenceStrategyStream;
-import org.hbrs.se1.ws25.exercises.uebung3.*;
-import org.junit.jupiter.api.*;
+package org.hbrs.se1.ws25.tests.uebung4;
+/* Erstmal nicht gefordert
+import org.hbrs.se1.ws25.exercises.uebung4.Container;
+import org.hbrs.se1.ws25.exercises.uebung4.persistence.PersistenceException;
+import org.hbrs.se1.ws25.exercises.uebung4.persistence.PersistenceStrategyMongoDB;
+import org.hbrs.se1.ws25.exercises.uebung4.persistence.PersistenceStrategyStream;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -51,7 +53,7 @@ public class ContainerPersistenceTest {
 
         c.addMember(new ConcreteMember(1));
 
-        var ex = assertThrows(PersistenceException.class, c::store);
+        var ex = assertThrows(PersistenceException.class, (Executable) c::store);
         assertEquals(PersistenceException.ExceptionType.ConnectionNotAvailable, ex.getExceptionType());
     }
 
@@ -87,4 +89,5 @@ public class ContainerPersistenceTest {
         assertEquals(1, c.size());
         assertEquals(42, c.getCurrentList().get(0).getID());
     }
-}
+    }
+    */

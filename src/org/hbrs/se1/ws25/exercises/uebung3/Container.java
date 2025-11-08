@@ -62,19 +62,7 @@ public final class Container {
         return memberList.size();
     }
 
-    //CR2:
-    public void store() throws PersistenceException {
-        if (strategy == null) {
-            throw new PersistenceException(
-                    PersistenceException.ExceptionType.ImplementationNotAvailable,
-                    "Keine Persistence-Strategie gesetzt!");
-        }
-        List<Member> loaded = strategy.load();
-        memberList.clear();
-        if (loaded != null) {
-            memberList.addAll(loaded);
-        }
-    }
+
 
     //CR3
     public List<Member> getCurrentList() {
@@ -87,6 +75,29 @@ public final class Container {
         memberList.clear();
     }
 
+    //CR2:
+    public void store() throws PersistenceException {
+        if (strategy == null) {
+            throw new PersistenceException(
+                    PersistenceException.ExceptionType.ConnectionNotAvailable,
+                    "Keine Persistence-Strategie gesetzt!"
+            );
+        }
+
+        try {
+            strategy.save(memberList);
+        } catch (UnsupportedOperationException e) {
+            throw e;
+        } catch (PersistenceException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new PersistenceException(
+                    PersistenceException.ExceptionType.ImplementationNotAvailable,
+                    "Fehler beim Speichern: " + e.getMessage()
+            );
+        }
+    }
+
     public void load() throws PersistenceException {
         if (strategy == null) {
             throw new PersistenceException(
@@ -94,6 +105,7 @@ public final class Container {
                     "Keine Persistence-Strategie gesetzt!"
             );
         }
+
         try {
             List<Member> newList = strategy.load();
             memberList.clear(); // alte Liste überschreiben

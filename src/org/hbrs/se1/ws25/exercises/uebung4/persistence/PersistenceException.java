@@ -2,9 +2,9 @@ package org.hbrs.se1.ws25.exercises.uebung4.persistence;
 
 public class PersistenceException extends Exception {
 
-    private ExceptionType exceptionType;
+    private final ExceptionType exceptionType;
 
-    public ExceptionType getExceptionTypeType() {
+    public ExceptionType getExceptionType() {
         return this.exceptionType;
     }
 
@@ -16,16 +16,11 @@ public class PersistenceException extends Exception {
     /**
      * ExceptionTypes for declaring the type of an exception.
      * Please feel free to extend this list!
-     * Hint: If an internal Exception of type java.lang.UnsupportedOperationException is thrown,
+     * Example: If an internal Exception of type java.lang.UnsupportedOperationException is thrown,
      * then this exception must be caught and transformed to an object of this exception-type, consisting
      * of Type 'ImplementationNotAvailable'. Re-throw the new exception e.g. to a client
      */
     public enum ExceptionType {
-        ImplementationNotAvailable,
-        ConnectionNotAvailable,
-        NoStrategyIsSet,
-        SaveFailure,
-        LoadFailure,
-        ClosingFailure
+        ImplementationNotAvailable, ConnectionNotAvailable, NoStrategyIsSet
     }
 }

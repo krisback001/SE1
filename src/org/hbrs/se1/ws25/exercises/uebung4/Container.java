@@ -4,193 +4,83 @@ import org.hbrs.se1.ws25.exercises.uebung4.persistence.PersistenceException;
 import org.hbrs.se1.ws25.exercises.uebung4.persistence.PersistenceStrategy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+public final class Container {
 
-/*
- * Klasse zum Abspeichern von Objekten in einer Liste
- *
- * c/o Sascha Alda, H-BRS, 2020-2025
- *
- */
-
-public class Container {
-
-	// Interne ArrayList zur Abspeicherung der Objekte
-	private List<Member> liste = null;
-
-	// Statische Klassen-Variable, um die Referenz
-	// auf das einzige Container-Objekt abzuspeichern
-	// Dynamische Belegung: nur falls Methode getInstance geladen
-	// wird, dann wird nach Bedarf die Variable mit einer Referenz gefüllt
-	private  static Container instance = null; // = new Container();
-
-	// Reference to the internal strategy (e.g. MongoDB or Stream)
-	private PersistenceStrategy strategy = null;
+    private static Container INSTANCE = null; //CR1 --Speicherintensiv, dafür Thread-Safe
+    private static List<UserStory> liste = new ArrayList<>();
 
 
-	/**
-	 * Statische Methode um die einzige Instanz der Klasse
-	 * Container zu bekommen. Das Keyword synchronized bewirkt,
-	 * dass garantiert nur ein Objekt den alleinigen Zugriff
-	 * auf diese Methode hat. Anonsten koennte es passieren, dass
-	 * zwei parallel zugreifende Objekte zwei unterschiedliche
-	 * Objekte erhalten (vgl. auch Erlaeuterung in Uebung)
-	 *
-	 */
-	public static synchronized Container getInstance() {
-		if (instance == null) {
-			instance = new Container();
-			System.out.println("Objekt vom Typ Container wurde instanziiert!");
-		}
-		return instance;
-	}
+    //CR1:
+    private Container() {
+    }
 
-	// Der statische Initialisierungsblock. Dient nur für Debug-Zwecke
-	// zur Verdeutlichung, wann eine Klasse geladen wird.
-	static {
-		System.out.println("Klasse Container wurde geladen!");
-		// instance = new Container();
-	}
+    public static synchronized Container getInstance() { //synchronized: Thread-Safe (darf nur einmalig aufgerufen werden)
+        if (INSTANCE == null) {
+            INSTANCE = new Container();
+            return INSTANCE;
+        }
+        return INSTANCE;
+    }
 
-	/**
-	 * Ueberschreiben des Konstruktors. Durch die Sichtbarkeit private
-	 * kann man von aussen die Klasse nicht mehr instanziieren,
-	 * sondern nur noch kontrolliert ueber die statische Methode
-	 * der Klasse Container!
-	 */
-	private Container(){
-		System.out.println("Container ist instanziiert (Konstruktor)!");
-		this.liste = new ArrayList<Member>();
-	}
+    //CR2:
+    private PersistenceStrategy<UserStory> strategy;
 
+    public void setPersistenceStrategy(PersistenceStrategy<UserStory> p) {
+        this.strategy = p;
+    }
 
-	/**
-	 * Method for getting the internal list. e.g. from a View-object
-	 * @return
-	 */
-	public List getCurrentList() {
-		return this.liste;
-	}
+    public void addUserStory(UserStory us) throws ContainerException {
+        if (us == null) return;
 
-	/**
-	 * Method for adding Member-objects
-	 * @param r
-	 * @throws ContainerException
-	 */
-	public void addMember ( Member r ) throws ContainerException {
-		if ( contains( r ) == true ) {
-			System.out.println("Duplikat: " + r.toString() );
-			ContainerException ex = new ContainerException( ContainerException.ExceptionType.DuplicateMember );
-			ex.addID ( r.getID() );
-			throw ex;
-		}
-		liste.add(r);
-	}
+        if (!us.isValid()) {
+            throw new ContainerException("Ungültige Eingabewerte für User Story mit ID " + us.getId());
+        }
 
-	/**
-	 * Methode zur Ueberpruefung, ob ein Member-Objekt in der Liste enthalten ist
-	 *
-	 */
-	private boolean contains( Member r) {
-		Integer ID = r.getID();
-		for ( Member rec : liste) {
-			if ( rec.getID() == ID ) {
-				return true;
-			}
-		}
-		return false;
-	}
+        for (UserStory story : liste) {
+            if (story.getId() == us.getId()) {
+                throw new ContainerException("User Story mit der ID " + us.getId() + " existiert bereits!");
+            }
+        }
 
-	/**
-	 * Method for deleting an object with a given id.
-	 *
-	 */
-	public String deleteMember(Integer id ) {
-		Member rec = getMember( id );
-		if (rec == null) return "Member nicht enthalten - ERROR"; else {
-			liste.remove(rec);
-			return "Member mit der ID " + id + " konnte geloescht werden";
-		}
-	}
+        liste.add(us);
+    }
 
-	/**
-	 * Method for getting the number of currently stored objects
-	 *
-	 */
-	public int size(){
-		return liste.size();
-	}
+    public static String deleteUserStory(int id) {
+        for (UserStory story : liste) {
+            if (story.getId() == id) {
+                liste.remove(story);
+                return "User Story mit ID " + id + " gelöscht.";
+            }
+        }
+        return "Keine User Story mit ID " + id + " gefunden.";
+    }
 
 
-	/**
-	 * Interne Methode zur Ermittlung eines Member
-	 *
-	 */
-	private Member getMember(Integer id) {
-		for ( Member rec : liste) {
-			if (id == rec.getID().intValue() ){
-				return rec;
-			}
-		}
-		return null;
-	}
+    public int size() {
+        return liste.size();
+    }
 
+    public List<UserStory> getCurrentList() {
+        return Collections.unmodifiableList(liste);
+    }
 
-	/**
-	 * Method for loading objects. Uses the internally stored strategy object
-	 * @throws PersistenceException
-	 */
-	public void load() throws PersistenceException {
-		if (this.strategy == null)
-			throw new PersistenceException(
-					PersistenceException.ExceptionType.NoStrategyIsSet,
-					"Strategy not initialized");
+    public void store() throws PersistenceException {
+        if (strategy == null) {
+            throw new PersistenceException(PersistenceException.ExceptionType.NoStrategyIsSet, "Keine Persistenzstrategie gesetzt!");
+        }
+        strategy.save(liste);
+    }
 
-		try {
-			List<Member> liste = this.strategy.load();
-			this.liste = liste;
-		} catch ( UnsupportedOperationException e) {
-			throw new PersistenceException(
-					PersistenceException.ExceptionType.ImplementationNotAvailable
-					, "MongoDB is not implemented!" );
-		}
-	}
-
-	/**
-	 * Method for setting the Persistence-Strategy from outside.
-	 * @param persistenceStrategy
-	 */
-	public void setPersistenceStrategie(PersistenceStrategy persistenceStrategy) {
-
-		this.strategy = persistenceStrategy;
-	}
-
-
-	/**
-	 * Method for storing objects. Uses the internally stored strategy object
-	 * @throws PersistenceException
-	 */
-	public void store() throws PersistenceException {
-		if (this.strategy == null)
-			throw new PersistenceException( PersistenceException.
-					ExceptionType.NoStrategyIsSet,
-					"Strategy not initialized");
-
-		try {
-			this.strategy.save( this.liste  );
-		} catch ( UnsupportedOperationException e) {
-			throw new PersistenceException( PersistenceException.ExceptionType.ImplementationNotAvailable
-					, "MongoDB is not implemented!" );
-		}
-	}
-
-	/**
-	 * Methode zum Löschen aller Member-Objekte
-	 * @throws PersistenceException
-	 */
-	public void deleteAllMembers() throws PersistenceException {
-		this.liste.clear();
-	}
-
+    public void load() throws PersistenceException {
+        if (strategy == null) {
+            throw new PersistenceException(PersistenceException.ExceptionType.NoStrategyIsSet,"Keine Persistenzstrategie gesetzt!");
+        }
+        List<UserStory> loaded = strategy.load();
+        if (loaded != null) {
+            liste = loaded;
+        }
+    }
 }
