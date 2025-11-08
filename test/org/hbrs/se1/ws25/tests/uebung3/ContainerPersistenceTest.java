@@ -1,9 +1,11 @@
 package org.hbrs.se1.ws25.tests.uebung3;
 
+//import org.hbrs.se1.ws25.exercises.uebung3.MemberConcrete;
 import org.hbrs.se1.ws25.exercises.uebung3.persistence.PersistenceException;
 import org.hbrs.se1.ws25.exercises.uebung3.persistence.PersistenceStrategyMongoDB;
 import org.hbrs.se1.ws25.exercises.uebung3.persistence.PersistenceStrategyStream;
 import org.hbrs.se1.ws25.exercises.uebung2.*;
+import org.hbrs.se1.ws25.exercises.uebung3.persistence.PersistenceStrategy;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
@@ -33,7 +35,7 @@ public class ContainerPersistenceTest {
     @Test
     void use_MongoStrategy_throws() {
         var c = Container.getInstance();
-        c.setPersistenceStrategy(new PersistenceStrategyMongoDB<>());
+        c.setPersistenceStrategy(new PersistenceStrategy<>());
         assertThrows(UnsupportedOperationException.class, c::store);
         // assertThrows(UnsupportedOperationException.class, c::load);
         // assertThrows(PersistenceException.class, c::store);
@@ -49,7 +51,7 @@ public class ContainerPersistenceTest {
         s.setLocation(dir.toString()); // absichtlich ein Directory
         c.setPersistenceStrategy(s);
 
-        c.addMember(new ConcreteMember(1));
+        c.addMember(new Member(1));
 
         var ex = assertThrows(PersistenceException.class, c::store);
         assertEquals(PersistenceException.ExceptionType.ConnectionNotAvailable, ex.getExceptionType());
