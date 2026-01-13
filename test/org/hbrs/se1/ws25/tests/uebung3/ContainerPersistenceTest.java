@@ -1,9 +1,9 @@
 package org.hbrs.se1.ws25.tests.uebung3;
 
-import org.hbrs.se1.ws25.exercises.uebung3.persistence.PersistenceException;
-import org.hbrs.se1.ws25.exercises.uebung3.persistence.PersistenceStrategyMongoDB;
-import org.hbrs.se1.ws25.exercises.uebung3.persistence.PersistenceStrategyStream;
-import org.hbrs.se1.ws25.exercises.uebung3.*;
+import org.hbrs.se1.ws25.exercises.uebung03.persistence.PersistenceException;
+import org.hbrs.se1.ws25.exercises.uebung03.persistence.PersistenceStrategyMongoDB;
+import org.hbrs.se1.ws25.exercises.uebung03.persistence.PersistenceStrategyStream;
+import org.hbrs.se1.ws25.exercises.uebung03.*;
 import org.junit.jupiter.api.*;
 
 import java.io.File;

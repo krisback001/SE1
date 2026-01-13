@@ -1,0 +1,18 @@
+package org.hbrs.se1.ws25.exercises.uebung04.persistence;
+
+import org.hbrs.se1.ws25.exercises.uebung04.UserStory;
+
+import java.util.List;
+
+public class PersistenceStrategyMongoDB<E> implements PersistenceStrategy<E> {
+
+    @Override
+    public void save(List<UserStory> member) {
+        throw new UnsupportedOperationException("Not implemented!");
+    }
+
+    @Override
+    public List<E> load() {
+        throw new UnsupportedOperationException("Not implemented!");
+    }
+}

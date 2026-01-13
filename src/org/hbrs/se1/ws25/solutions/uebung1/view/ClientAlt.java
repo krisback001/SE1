@@ -1,6 +1,6 @@
 package org.hbrs.se1.ws25.solutions.uebung1.view;
 
-import org.hbrs.se1.ws25.exercises.uebung1.control.GermanTranslator;
+import org.hbrs.se1.ws25.exercises.uebung01.control.GermanTranslator;
 
 /**
  * Verwendung Implementation Inheritance.

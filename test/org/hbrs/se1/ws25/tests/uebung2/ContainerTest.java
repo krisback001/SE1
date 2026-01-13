@@ -1,9 +1,9 @@
 package org.hbrs.se1.ws25.tests.uebung2;
 
-import org.hbrs.se1.ws25.exercises.uebung2.ConcreteMember;
-import org.hbrs.se1.ws25.exercises.uebung2.Container;
-import org.hbrs.se1.ws25.exercises.uebung2.ContainerException;
-import org.hbrs.se1.ws25.exercises.uebung2.Member;
+import org.hbrs.se1.ws25.exercises.uebung02.ConcreteMember;
+import org.hbrs.se1.ws25.exercises.uebung02.Container;
+import org.hbrs.se1.ws25.exercises.uebung02.ContainerException;
+import org.hbrs.se1.ws25.exercises.uebung02.Member;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
