@@ -153,6 +153,8 @@ public class MyPrettyRectangleTest {
 	 * (Ergebnis: Wert in Zentimeter, cm)
 	 *
 	 */
+
+    //Ab hier habe ich es nichtmehr geschafft etwas gescheites zu probieren..
 	@Test
 	public void testGetPerimeter(){
 		assertEquals( 10.0, left.getPerimeter() , 0.0001 );
