@@ -1,5 +1,8 @@
 package org.hbrs.se1.ws25.tests.uebung10;
 
+import org.hbrs.se1.ws25.exercises.uebung10.MyPrettyRectangle;
+import org.hbrs.se1.ws25.exercises.uebung10.MyPoint;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +43,6 @@ public class MyPrettyRectangleTest {
 		middle = new MyPrettyRectangle(2.0, 2.0, 3.0, 3.0); // m
 		right = new MyPrettyRectangle(1.0, 0.0, 4.0, 4.0);  // r
 		somewhere = new MyPrettyRectangle(5.0, 1.0, 6.0, 4.0); // s
-
 	}
 
 	/*
@@ -54,8 +56,22 @@ public class MyPrettyRectangleTest {
 		// Erste Tests, um die Korrektheit der Methode contains() zu ueberpruefen
         assertTrue(  right.contains(middle) );
         assertTrue(  right.contains(right) );
+        assertFalse(  right.contains(left) );
+        assertFalse(  right.contains(somewhere) );
 
-		// Weitere Assertions angeben, um den Test vollständig durchzuführen:
+        assertFalse(  left.contains(right) );
+        assertTrue(  left.contains(middle) );
+        assertFalse(  left.contains(somewhere) );
+
+        assertFalse(  middle.contains(right) );
+        assertFalse(  middle.contains(left) );
+        assertFalse(  middle.contains(somewhere) );
+
+        assertFalse(  somewhere.contains(right) );
+        assertFalse(  somewhere.contains(left) );
+        assertFalse(  somewhere.contains(middle) );
+
+        // Weitere Assertions angeben, um den Test vollständig durchzuführen:
 		//
 		// [ihr Code]
 
@@ -70,6 +86,28 @@ public class MyPrettyRectangleTest {
 	public void testGetCenter(){
 		// Erster Test, um die Korrektheit der Methode getCenter() zu ueberpruefen
 		assertEquals( new MyPoint(1.5, 2.0), left.getCenter() );
+        assertEquals( new MyPoint(2.5, 2.5), middle.getCenter() );
+        assertEquals( new MyPoint(2.5, 2.0), right.getCenter() );
+        assertEquals( new MyPoint(5.5, 2.5), somewhere.getCenter() );
+        
+        
+        //NR: 
+        // left:
+        // (0+3) /2 = 1.5 = x1
+        // (1+3) /2 = 2 = y1
+        // middle:
+        // (2+3) /2 = 2.5 = x1
+        // (2+3) /2 = 2.5 = y1
+        // right:
+        // (1+4) /2 = 2.5 = x1
+        // (0+4) /2 = 2 = y1
+
+        // somewhere:
+        // (5+6) /2 = 5.5 = x1
+        // (1+4) /2 = 2.5 = y1
+
+
+
 
 		// Hier sollten sie die weiteren Tests einfuegen, welche die errechneten Mittelpunkte der Rechtecke
 		// right, middle und somewhere mit den tatsaechlichen Mittelpunkten vergleicht.
@@ -79,8 +117,8 @@ public class MyPrettyRectangleTest {
 		//
 		// [ihr Code]
 
-
     }
+
 
 	/*
 	 * Methode zum Testen einer Methode der Klasse MyPrettyRectangle, welche die Flaeche eines Rechtecks berechnet
@@ -90,16 +128,21 @@ public class MyPrettyRectangleTest {
 
 	@Test
 	public void testGetArea(){
-		assertEquals( 6.0, left.getArea() , 0.0001);
-
-		// Hier sollten sie weitere Tests einfuegen, welche die errechneten Flaechen der Rechtecke
+        assertEquals( 6.0, left.getArea() , 0.0001);
+        // (3-0) * (3-1) = 6
+        assertEquals( 1.0, middle.getArea() , 0.0001);
+        // (3-2) * (3-2) = 1
+        assertEquals( 12.0, right.getArea() , 0.0001);
+        // (4-1) * (4-0) = 12
+        assertEquals( 3.0, somewhere.getArea() , 0.0001);
+        // (6-5) * (4-1) = 3
+        // Hier sollten sie weitere Tests einfuegen, welche die errechneten Flaechen der Rechtecke
 		// mit den tatsaechlichen Werten vergleicht.
 		// Die Methode zur Berechnung der Flaeche sollten sie selbst definieren und implementieren.
 		// Bitte beruecksichtigen sie auch das erlaubte Delta zwischen expected und actual values.
 		// Weitere Infos: http://stackoverflow.com/questions/7554281/junit-assertions-make-the-assertion-between-floats
         //
         // [ihr Code]
-
 
 	}
 
